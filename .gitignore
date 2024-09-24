@@ -69,18 +69,20 @@ consensus_tree <- plotBS(fit_nj$tree, bs, p = 50)  # Use p = 50 to show bootstra
 # Plot the tree with bootstrap values
 library(ggtree)
 
+
 p <- ggtree(consensus_tree, cex = 0.1, branch.length = 0.1, layout = "rectangular") +
   geom_tiplab(hjust = -0.00001, vjust = 0.55) +  # Add tip labels
-  xlim(c(0, 0.4)) +  # Adjust x-axis to control branch lengths
+  xlim(c(0, 0.06)) +  # Adjust x-axis to control branch lengths
   ggtitle('Phylogenetic tree of IRLC legumes with bootstrap values') +
   geom_text2(aes(label = node), hjust = 1.8, vjust = -0.5, size = 2.7)  # Add node numbers
 
 p1 <- ggtree(consensus_tree, cex = 0.1, branch.length = 0.1, layout = "rectangular") +
   geom_tiplab(hjust = -0.00001, vjust = 0.55) +  # Add tip labels
-  xlim(c(0, 0.4)) +  # Adjust x-axis to control branch lengths
+  xlim(c(0, 0.06)) +  # Adjust x-axis to control branch lengths
   ggtitle('Phylogenetic tree of IRLC legumes with bootstrap values') +
   geom_nodelab(size = 2.7, hjust = 1.65, vjust = -0.5)+ # Display the bootstrap values on the tree
-  geom_highlight(node = 18, fill = "green", alpha = 0.4,extend = 0.075) # highlight particular node
+  geom_highlight(node = 9, fill = "green", alpha = 0.4,extend = 0.012) # highlight particular node
+
 
 
 
