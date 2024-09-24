@@ -1,9 +1,11 @@
-setwd("D:\\nostoc")
+# Setting working directory (replace with your own directory where the input fasta file is located)
+setwd("D:\\rworks\\phylo_tree")  
 
 
-# reading XStringSet object from a fasta file
-seqs_s <- readDNAStringSet("irlc_legumes.fasta", format = "fasta")
+# Reading XStringSet object from a fasta file 
+seqs_s <- readDNAStringSet("input_file_name.fasta", format = "fasta")
 
+# Naming the sequences with organisms' names 
 names(seqs_s) <- c("Astragalus_canadensis_var._brevidens", 
                    "Cicer_arietinum", 
                    "Glycyrrhiza_uralensis", 
@@ -19,6 +21,7 @@ names(seqs_s) <- c("Astragalus_canadensis_var._brevidens",
                    "Galega_orientalis")
 
 
+# Aligning sequences
 library(DECIPHER)
 align <- AlignSeqs(seqs_s)
 
