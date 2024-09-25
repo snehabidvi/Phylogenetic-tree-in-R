@@ -12,9 +12,9 @@ If these packages are not installed, then run the following commands to first in
 ## To install Bioconductor suite of packages, run -
 
 ```{r}
-#if (!require("BiocManager", quietly = TRUE))
+if (!require("BiocManager", quietly = TRUE))
     #install.packages("BiocManager")
-#BiocManager::install(version = "3.19")
+BiocManager::install(version = "3.19")
 
 ```
 
@@ -22,7 +22,7 @@ If these packages are not installed, then run the following commands to first in
 ## To install Biostrings, ggtree and DECIPHER packages which are the part of Bioconductor library, run -
 
 ```{r}
-#BiocManager::install(c("Biostrings","ggtree" ,"DECIPHER"))
+BiocManager::install(c("Biostrings","ggtree" ,"DECIPHER"))
 
 ```
 
@@ -35,9 +35,9 @@ The input file of sequences must be in the fasta format. The sequence file shoul
 ## Reading XStringSet object from a file
 
 ```{r}
-#readDNAStringSet(filepath, format="fasta",
-               #nrec=-1L, skip=0L, seek.first.rec=FALSE,
-               #use.names=TRUE, with.qualities=FALSE)
+readDNAStringSet(filepath, format="fasta",
+               nrec=-1L, skip=0L, seek.first.rec=FALSE,
+               use.names=TRUE, with.qualities=FALSE)
 
 ```
 
@@ -112,20 +112,20 @@ Arguments -
 AlignSeqs() function performs profile-to-profile alignment of multiple unaligned sequences following a guide tree.
 
 ```{r}
-#AlignSeqs(myXStringSet,
-         #guideTree = NULL,
-         #iterations = 2,
-         #refinements = 1,
-         #gapOpening = c(-18, -14),
-         #gapExtension = c(-3, -2),
-         #useStructures = TRUE,
-         #structures = NULL,
-         #FUN = AdjustAlignment,
-         #levels = c(0.9, 0.7, 0.7, 0.4, 10, 5, 5, 2),
-         #alphabet = AA_REDUCED[[1]],
-         #processors = 1,
-         #verbose = TRUE,
-         #...)
+AlignSeqs(myXStringSet,
+         guideTree = NULL,
+         iterations = 2,
+         refinements = 1,
+         gapOpening = c(-18, -14),
+         gapExtension = c(-3, -2),
+         useStructures = TRUE,
+         structures = NULL,
+         FUN = AdjustAlignment,
+         levels = c(0.9, 0.7, 0.7, 0.4, 10, 5, 5, 2),
+         alphabet = AA_REDUCED[[1]],
+         processors = 1,
+         verbose = TRUE,
+         ...)
 
 ```
 
@@ -168,17 +168,17 @@ Arguments -
 BrowseSeqs() function Opens an html file in a web browser to show the sequences in an XStringSet
 
 ```{r}
-#BrowseSeqs(myXStringSet,
-           #htmlFile = tempfile(fileext=".html"),
-           #openURL = interactive(),
-           #colorPatterns = TRUE,
-           #highlight = NA,
-           #patterns = c("-", alphabet(myXStringSet, baseOnly=TRUE)),
-           #colors = substring(rainbow(length(patterns),
+BrowseSeqs(myXStringSet,
+           htmlFile = tempfile(fileext=".html"),
+           openURL = interactive(),
+           colorPatterns = TRUE,
+           highlight = NA,
+           patterns = c("-", alphabet(myXStringSet, baseOnly=TRUE)),
+           colors = substring(rainbow(length(patterns),
                               #v=0.8, start=0.9, end=0.7), 1, 7),
-           #colWidth = Inf,
-           #title = "",
-           #...)
+           colWidth = Inf,
+           title = "",
+           ...)
            
 ```
 
@@ -212,7 +212,7 @@ Arguments -
 read.phyDat() function reads a file in fasta format. This format are used to store nucleotide or protein multiple alignments.
 
 ```{r}
-# alignment <- read.phyDat("seqs_ali.fasta", format = "fasta")
+alignment <- read.phyDat("seqs_ali.fasta", format = "fasta")
 
 ```
 
@@ -239,7 +239,7 @@ Arguments -
 dist.ml() function computes pairwise distances for an object of class phyDat. dist.ml uses DNA / AA sequences to compute distances under different substitution models.
 
 ```{r}
-# dist_matrix <- dist.ml(alignment)
+dist_matrix <- dist.ml(alignment)
 
 ```
 
@@ -270,7 +270,7 @@ Arguments -
 NJ() function performs the neighbor-joining tree estimation of Saitou and Nei (1987). UNJ is the unweighted version from Gascuel (1997).
 
 ```{r}
-# nj_tree <- NJ(dist_matrix)
+nj_tree <- NJ(dist_matrix)
 
 
 ```
@@ -288,7 +288,7 @@ pml() function computes the likelihood of a phylogenetic tree given a sequence a
 
 
 ```{r}
-# fit_nj <- pml(nj_tree, data = alignment)
+fit_nj <- pml(nj_tree, data = alignment)
 
 
 ```
@@ -307,7 +307,7 @@ optim.pml() function optim.pml optimizes the different model parameters.
 
 
 ```{r}
-# fit_nj <- optim.pml(fit_nj, model = "GTR", optGamma = TRUE, optInv = TRUE)
+fit_nj <- optim.pml(fit_nj, model = "GTR", optGamma = TRUE, optInv = TRUE)
 
 
 ```
@@ -347,7 +347,7 @@ Arguments -
 bootstrap.pml() function performs (non-parametric) bootstrap analysis and bootstrap.phyDat produces a list of bootstrapped data sets. plotBS plots a phylogenetic tree with the bootstrap values assigned to the (internal) edges.
 
 ```{r}
-# bs <- bootstrap.pml(fit_nj, bs = 100, optNni = TRUE, model = "GTR")
+bs <- bootstrap.pml(fit_nj, bs = 100, optNni = TRUE, model = "GTR")
 
 ```
 
@@ -376,7 +376,7 @@ Arguments -
 ## Creating a consensus tree with the bootstrap value
     
 ```{r}
-# consensus_tree <- plotBS(fit_nj$tree, bs, p = 50)  # Use p = 50 to show bootstrap values >= 50%
+consensus_tree <- plotBS(fit_nj$tree, bs, p = 50)  # Use p = 50 to show bootstrap values >= 50%
 
 ```
 
@@ -413,22 +413,22 @@ Arguments -
 ggtree() function is to draw phylogenetic tree from phylo object
 
 ```{r}
-# library(ggtree)
+library(ggtree)
 
 # To get node numbers for highlighting particular node of organism of interest/query 
 
-# p <- ggtree(consensus_tree, cex = 0.1, branch.length = 0.1, layout = "rectangular") +
-  #geom_tiplab(hjust = -0.00001, vjust = 0.55) +  # Add tip labels
-  #xlim(c(0, 0.4)) +  # Adjust x-axis to control branch lengths
-  #ggtitle('Phylogenetic tree of IRLC legumes with bootstrap values')
+p <- ggtree(consensus_tree, cex = 0.1, branch.length = 0.1, layout = "rectangular") +
+  geom_tiplab(hjust = -0.00001, vjust = 0.55) +  # Add tip labels
+  xlim(c(0, 0.4)) +  # Adjust x-axis to control branch lengths
+  ggtitle('Phylogenetic tree of IRLC legumes with bootstrap values')
 
 
-#p1 <- ggtree(consensus_tree, cex = 0.1, branch.length = 0.1, layout = "rectangular") +
-  #geom_tiplab(hjust = -0.00001, vjust = 0.55) +  # Add tip labels
-  #xlim(c(0, 0.4)) +  # Adjust x-axis to control branch lengths
-  #ggtitle('Phylogenetic tree of IRLC legumes with bootstrap values') +
-  #geom_nodelab(size = 2.7, hjust = 1.65, vjust = -0.5)+ # Display the bootstrap values on the tree
-  #geom_highlight(node = 18, fill = "green", alpha = 0.4,extend = 0.075) # highlight particular node
+p1 <- ggtree(consensus_tree, cex = 0.1, branch.length = 0.1, layout = "rectangular") +
+  geom_tiplab(hjust = -0.00001, vjust = 0.55) +  # Add tip labels
+  xlim(c(0, 0.4)) +  # Adjust x-axis to control branch lengths
+  ggtitle('Phylogenetic tree of IRLC legumes with bootstrap values') +
+  geom_nodelab(size = 2.7, hjust = 1.65, vjust = -0.5)+ # Display the bootstrap values on the tree
+  geom_highlight(node = 18, fill = "green", alpha = 0.4,extend = 0.075) # highlight particular node
 
 
 ```
